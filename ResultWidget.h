@@ -15,7 +15,6 @@ public slots:
     void setBeforeProcessingFileSize(const QString& text);
     void setAfterProcessingFileSize(const QString& text);
     void setEfficiency(const QString& text);
-    void showErrorMessage(const QString& text);
 
 private:
     QLabel* beforeProcessingLabel;

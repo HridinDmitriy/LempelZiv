@@ -18,14 +18,15 @@ public slots:
     void startDecompressionSlot(const QString& fileName);
     void setDataPreparationWidgetActiveSlot();
     void setResultWidgetActiveSlot();
+    void showMessage(const QString& text);
 
 private:
-    Compressor compressor;
-    Decompressor decompressor;
+    Compressor              compressor;
+    Decompressor            decompressor;
 
-    QStackedLayout* stackLayout;
-    DataPreparationWidget* dataPreparationWidget;
-    ResultWidget* resultWidget;
+    QStackedLayout*         stackLayout;
+    DataPreparationWidget*  dataPreparationWidget;
+    ResultWidget*           resultWidget;
 
 signals:
     void closeAppSignal();

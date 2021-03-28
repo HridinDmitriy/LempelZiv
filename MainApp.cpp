@@ -1,4 +1,5 @@
 #include "MainApp.h"
+#include <QMessageBox>
 
 MainApp::MainApp(QWidget *parent)
     : QWidget(parent)
@@ -23,12 +24,13 @@ MainApp::MainApp(QWidget *parent)
 
     connect(resultWidget, &ResultWidget::closeButtonPressedSignal, this, &MainApp::closeAppSignal);
 
-    connect(&compressor, &Compressor::errorOccuredSignal, resultWidget, &ResultWidget::showErrorMessage);
+    connect(&compressor, &Compressor::errorOccuredSignal, this, &MainApp::showMessage);
+    connect(&decompressor, &Decompressor::errorOccuredSignal, this, &MainApp::showMessage);
+
     connect(&compressor, &Compressor::inputFileSizeSignal, resultWidget, &ResultWidget::setBeforeProcessingFileSize);
     connect(&compressor, &Compressor::outputFileSizeSignal, resultWidget, &ResultWidget::setAfterProcessingFileSize);
     connect(&compressor, &Compressor::efficiencySignal, resultWidget, &ResultWidget::setEfficiency);
 
-    connect(&decompressor, &Decompressor::errorOccuredSignal, resultWidget, &ResultWidget::showErrorMessage);
     connect(&decompressor, &Decompressor::inputFileSizeSignal, resultWidget, &ResultWidget::setBeforeProcessingFileSize);
     connect(&decompressor, &Decompressor::outputFileSizeSignal, resultWidget, &ResultWidget::setAfterProcessingFileSize);
     connect(&decompressor, &Decompressor::efficiencySignal, resultWidget, &ResultWidget::setEfficiency);
@@ -62,6 +64,12 @@ void MainApp::setDataPreparationWidgetActiveSlot()
 void MainApp::setResultWidgetActiveSlot()
 {
     stackLayout->setCurrentWidget(resultWidget);
+}
+
+void MainApp::showMessage(const QString &text)
+{
+    QMessageBox::critical(nullptr, "Error", text);
+    setDataPreparationWidgetActiveSlot();
 }
 
 

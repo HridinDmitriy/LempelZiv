@@ -89,7 +89,3 @@ void ResultWidget::setEfficiency(const QString &text)
     efficiencyValue->setText(text);
 }
 
-void ResultWidget::showErrorMessage(const QString &text)
-{
-    QMessageBox::critical(nullptr, "Error", text);
-}
